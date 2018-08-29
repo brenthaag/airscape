@@ -25,9 +25,11 @@ metadata {
 		capability "Switch"
 		capability "Switch Level"
 		capability "Temperature Measurement"
-        
-        command "fanSpeedUp"
-        command "fanSpeedDn"
+        	
+        	command "fanSpeedUp"
+        	command "fanSpeedDn"
+		command "fanOff"
+		command "fanTimerAdd"
 	}
 
 
@@ -36,8 +38,7 @@ metadata {
 	}
     
     preferences {
-           input name: "fanIPaddr", type: "text", title: "IP Address", description: "Enter IP address of fan", required: true
-           
+           input name: "fanIPaddr", type: "string", title: "IP Address", description: "Enter IP address of fan", defaultValue:"", required: true, displayDuringSetup: true
     }
            
 	tiles {
