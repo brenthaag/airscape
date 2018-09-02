@@ -59,7 +59,25 @@ metadata {
 		standardTile("refresh", "device.switch", inactiveLabel: false, decoration: "flat", width: 2, height: 2) {
 			state "default", label:"", action:"refresh.refresh", icon:"st.secondary.refresh"
 		}
-		
+		standardTile("lowSpeed", "device.currentState", inactiveLabel: false, width: 2, height: 2) {
+			state "default", label: 'LOW', action: "lowSpeed", icon:"st.Home.home30", backgroundColor: "#ffffff"
+			state "LOW", label:'LOW', action: "lowSpeed", icon:"st.Home.home30", backgroundColor: "#79b821"
+			state "ADJUSTING.LOW", label:'LOW', action: "lowSpeed", icon:"st.Home.home30", backgroundColor: "#2179b8"
+  		}
+		standardTile("medSpeed", "device.currentState", inactiveLabel: false, width: 2, height: 2) {
+			state "default", label: 'MED', action: "medSpeed", icon:"st.Home.home30", backgroundColor: "#ffffff"
+			state "MED", label: 'MED', action: "medSpeed", icon:"st.Home.home30", backgroundColor: "#79b821"
+			state "ADJUSTING.MED", label:'MED', action: "medSpeed", icon:"st.Home.home30", backgroundColor: "#2179b8"
+		}
+		standardTile("highSpeed", "device.currentState", inactiveLabel: false, width: 2, height: 2) {
+			state "default", label: 'HIGH', action: "highSpeed", icon:"st.Home.home30", backgroundColor: "#ffffff"
+			state "HIGH", label: 'HIGH', action: "highSpeed", icon:"st.Home.home30", backgroundColor: "#79b821"
+			state "ADJUSTING.HIGH", label:'HIGH', action: "highSpeed", icon:"st.Home.home30", backgroundColor: "#2179b8"
+		}
+		standardTile("indicator", "device.indicatorStatus", inactiveLabel: false, decoration: "flat", width: 2, height: 2) {
+			state "when off", action:"indicator.indicatorWhenOn", icon:"st.indicators.lit-when-off"
+			state "when on", action:"indicator.indicatorNever", icon:"st.indicators.lit-when-on"
+			state "never", action:"indicator.indicatorWhenOff", icon:"st.indicators.never-lit"
 		main("switch")
 		details("switch",)////FINISH THIS
 	}
