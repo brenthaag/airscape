@@ -27,11 +27,11 @@ metadata {
 		capability "Temperature Measurement"
 		
 		command "fanSpeedUp"
-		command "fanSpeedDn"
+		command "fanSpeedDown"
 		command "fanOff"
 		command "fanTimerAdd"
 		
-		attribute "currentState", "string"
+		attribute "currentSpeed", "string"
 	}
 	
 	simulator {
@@ -44,18 +44,24 @@ metadata {
 	
 	tiles (scale:2) {
 		multiAttributeTile(name: "switch", type: "lighting", width: 6, height: 4, canChangeIcon: true) {
-			tileAttribute ("device.currentState", key: "PRIMARY_CONTROL") {
-				attributeState "default", label:'ADJUSTING', action:"refresh.refresh", icon:"st.Lighting.light24", backgroundColor:"#2179b8", nextState: "turningOff"
-				attributeState "SPEED3", label:'SPEED3', action:"switch.off", icon:"st.Lighting.light24", backgroundColor:"#486e13", nextState: "turningOff"
-				attributeState "SPEED2", label:'SPEED2', action:"switch.off", icon:"st.Lighting.light24", backgroundColor:"#60931a", nextState: "turningOff"
-				attributeState "SPEED1", label:'SPEED1', action:"switch.off", icon:"st.Lighting.light24", backgroundColor:"#79b821", nextState: "turningOff"
-				attributeState "OFF", label:'OFF', action:"switch.on", icon:"st.Lighting.light24", backgroundColor:"#ffffff", nextState: "turningOn"
-				attributeState "turningOn", action:"switch.on", label:'TURNINGON', icon:"st.Lighting.light24", backgroundColor:"#2179b8", nextState: "turningOn"
-				attributeState "turningOff", action:"switch.off", label:'TURNINGOFF', icon:"st.Lighting.light24", backgroundColor:"#2179b8", nextState: "turningOff"
+			tileAttribute ("device.currentSpeed", key: "PRIMARY_CONTROL") {
+				attributeState("default", label:'ADJUSTING', action:"refresh.refresh", icon:"st.Lighting.light24", backgroundColor:"#2179b8", nextState:"turningOff")
+				attributeState("Speed3", label:'SPEED3', action:"switch.off", icon:"st.Lighting.light24", backgroundColor:"#486e13", nextState: "turningOff")
+				attributeState("Speed2", label:'SPEED2', action:"switch.off", icon:"st.Lighting.light24", backgroundColor:"#60931a", nextState: "turningOff")
+				attributeState("Speed1", label:'SPEED1', action:"switch.off", icon:"st.Lighting.light24", backgroundColor:"#79b821", nextState: "turningOff")
+				attributeState("OFF", label:'OFF', action:"switch.on", icon:"st.Lighting.light24", backgroundColor:"#ffffff", nextState: "turningOn")
+				attributeState("turningOn", action:"switch.on", label:'TURNINGON', icon:"st.Lighting.light24", backgroundColor:"#2179b8", nextState: "turningOn")
+				attributeState("turningOff", action:"switch.off", label:'TURNINGOFF', icon:"st.Lighting.light24", backgroundColor:"#2179b8", nextState: "turningOff")
 			}
-			tileAttribute ("device.level", key: "SECONDARY_CONTROL") {
-				attributeState "level", label:'${currentValue}%'
+			tileAttribute("device.level", key: "SECONDARY_CONTROL") {
+				attributeState("level", label:'${currentValue}%')
 			}
+			tileAttribute("device.speed", key:"VALUE_CONTROL") {
+				attributeState("VALUE_UP", action:"fanSpeedUp")
+				attributeState("VALUE_DOWN", action:"fanSpeedDown")
+			}
+				      
+				      
 		standardTile("refresh", "device.switch", inactiveLabel: false, decoration: "flat", width: 2, height: 2) {
 			state "default", label:"", action:"refresh.refresh", icon:"st.secondary.refresh"
 		}
